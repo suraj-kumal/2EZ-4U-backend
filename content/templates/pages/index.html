@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load content_extras %}
+
+
+{% block newslist %}
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-2 col-sm-12"></div>
+    <div class="col-md-8 col-sm-12">
+
+      <div class="row news-list">
+        <div class="row">
+          <div class="col-md-12 align-self-center">
+            <h2>Technology <span>News</span></h2>
+          </div>
+          <hr>
+        </div>
+        {% for article in articles %}
+        <div class="col-md-12 col-sm-12 align-self-center ">
+          <div class="card mb-3 border-0 ">
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if article.media_url == 'na' %}
+                <img
+                  src="https://yt3.googleusercontent.com/u-7NgX9EATY6VnW6w2Ux0bRlkeEi8-IdUZujnrOwRj6nGc6RRd3aK45mcDK958okYu5kTmnK7Q=s900-c-k-c0x00ffffff-no-rj"
+                  class="img-fluid rounded-start" alt="Generic placeholder image" style="width: 70%;height:auto;">
+                {% else %}
+                <img src="{{article.media_url}}" alt="Generic placeholder image" class="img-fluid rounded-start">
+                {% endif %}
+              </div>
+              <div class="col-md-8">
+                <div class="card-body align-self-center">
+                  <h5 class="card-title"><a href="{{article.link}}" target="_blank">{{article.title}}</a></h5>
+                  <p><small><a href="{{article.link}}" target="_blank">{{article.news_site.name}} &nbsp;</a> |
+                      {{article.publication_date}}</small></p>
+                  <p class="card-text">{{article.description|get_paragraph| safe}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 d-flex justify-content-end mt-4"><a href="/news/list/"
+            style="color: #06a3da;text-decoration: none;">see all <i class="fa-solid fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-12"></div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block subjectlist %}
+<div class="container-fluid course-list ">
+  <div class="row">
+    <div class="col-md-12 align-self-center text-center">
+      <h2>Our Courses</h2>
+    </div>
+    <hr>
+  </div>
+  <div class="row course-list ">
+    {% for subject in subjects %}
+    <div class="col-md-4 col-sm-12 align-self-center ">
+      <div class="card mb-3 border-0 " style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <a href="/course/{{ subject.slug }}"><img src="{{subject.logo.url}}" class="img-fluid rounded-start"
+                alt="{{subject.title}}"></a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body align-self-center">
+              <h5 class="card-title"><a href="/course/{{ subject.slug }}">{{subject.title}}</a></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-8 col-sm-12">
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block youtube %}
+<div class="container-fluid video-list">
+  <!-- for title  -->
+  <div class="row">
+    <div class="col-md-12 align-self-center text-center">
+      <h2>EzExplanation<span> Videos</span></h2>
+    </div>
+    <hr>
+  </div>
+  <!-- for videos  -->
+  <div class="row">
+    {% for video in videos %}
+    <div class="col-md-4">
+      <div class="embed-responsive embed-responsive-21by9">
+        <iframe class="embed-responsive-item" src="{{video.url}}"></iframe>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+</div>
+{% endblock %}
+
+
+{% block recent_blog %}
+<div class="container-fluid blog-list">
+  <div class="row">
+    <div class="col-md-12 align-self-center text-center">
+      <h2>Recent <span style="color: #06a3da;">Blogs</span></h2>
+    </div>
+    <hr>
+  </div>
+  <div class="row course-list">
+    {% for blog in blogs %}
+    <div class="col-md-12 col-sm-12">
+      <div class="card mb-3 border-0 shadow-lg ">
+        <div class="row g-0">
+          <div class="col-md-4 align-self-center">
+            <a href="/blog/{{blog.slug}}/">
+              <img src="/media/{{blog.featured_image}}" class="img-fluid rounded-start" alt="...">
+            </a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ">
+              <h5 class="card-title"><a href="/blog/{{blog.slug}}">{{blog.title}}</a></h5>
+              <p><small>{{blog.published_at}}</small></p>
+              <p class="card-text">{{blog.content|truncatewords:80|safe}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-8 col-sm-12">
+    </div>
+  </div>
+</div>
+{% endblock %}

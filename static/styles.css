@@ -1,0 +1,278 @@
+body {
+  font-family: "Poppins", sans-serif !important;
+  justify-content: space-between;
+  text-align: justify;
+  background-color: #fff;
+}
+#section1 {
+  margin-top: 100px;
+  background-color: #06a3da !important;
+  height: 500px;
+  text-align: center;
+}
+#hero span {
+  color: white;
+  font-weight: bold;
+}
+.main {
+  margin-top: 20px;
+}
+#bread {
+  margin-top: 70px;
+  background-color: #06a3da !important;
+  color: white;
+}
+#bread a {
+  color: white;
+}
+
+.card-img-bottom {
+  /* Ensure aspect ratio consistency: */
+  object-fit: cover;
+  aspect-ratio: attr(width) / attr(height);
+  width: 40%;
+
+  /* Responsive size adaptation: */
+  max-width: 100% !important;
+  height: auto;
+}
+
+.row {
+  /* Optionally align cards to the top for a more uniform look: */
+  align-items: flex-start;
+}
+
+.course-list {
+  margin-top: 20px;
+}
+.course-list a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.course-list a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.blog-list {
+  margin-top: 20px;
+}
+.blog-list a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.blog-list a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.news-list a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.news-list a:hover {
+  color: #000;
+  text-decoration: none;
+}
+.news-list .card-text p {
+  justify-content: safe center;
+}
+.news-list {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.news-list span {
+  color: #06a3da;
+  font-weight: bold;
+}
+
+.video-list span {
+  color: #06a3da;
+  font-weight: bold;
+}
+/* .blog-list span {
+  color: #06a3da;
+  font-weight: bold;
+} */
+
+a {
+  color: #06a3da;
+  text-decoration: none;
+}
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+footer {
+  background-color: #06a3da;
+}
+
+footer li a {
+  color: #fff;
+  text-decoration: none;
+}
+footer li a:hover {
+  color: #000;
+  text-decoration: none;
+}
+.about-us {
+  margin-top: 20px;
+  margin-bottom: 200px;
+}
+.about-us a {
+  background-color: #06a3da;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+}
+.about-us a:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.news-list-main a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.news-list-main a:hover {
+  color: #000;
+  text-decoration: none;
+}
+.news-list-main .card-text p {
+  justify-content: safe center;
+}
+
+/* .news-list-main {
+  max-height: 500px;
+  overflow-y: scroll;
+} */
+.news-list-main span {
+  color: #06a3da;
+  font-weight: bold;
+}
+.content-header a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.content-header a:hover {
+  color: #000;
+  text-decoration: none;
+}
+.content-header .img-fluid {
+  max-height: 100px;
+  width: auto;
+}
+
+.vl {
+  border-left: 2px solid #06a3da;
+  height: 500px;
+}
+
+#content-topic a {
+  color: #06a3da;
+  text-decoration: none;
+  text-align: justify;
+  justify-content: space-between;
+}
+#content-topic a:hover {
+  color: #000;
+  text-decoration: none;
+  text-align: justify;
+  justify-content: space-between;
+}
+
+.breadcrumb-item a {
+  color: #06a3da;
+  text-decoration: none;
+}
+.breadcrumb-item a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Custom CSS for separate scrolling in columns */
+
+/* For larger screens (desktops) */
+@media (min-width: 992px) {
+  /* Set maximum height and overflow for the columns */
+  #content-topic,
+  #course-content {
+    max-height: calc(200vh - 200px); /* Adjust as needed */
+    overflow-y: auto;
+  }
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 991px) {
+  /* Set overflow for the columns */
+  #content-topic,
+  #course-content {
+    overflow-y: auto;
+  }
+}
+#course-content span {
+  font-family: "Poppins", sans-serif !important;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  /* color: #333; */
+}
+#course-content span img {
+  max-width: 100%;
+}
+#course-content span table {
+  max-width: 100%;
+}
+.controller a {
+  background-color: #06a3da;
+  color: white;
+  text-decoration: none;
+}
+
+.controller a:hover {
+  background-color: #06a3da;
+  color: white;
+  text-decoration: none;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+/* .round-btn {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+} */
+#scrollUpBtn {
+  color: white;
+  background-color: #06a3da;
+  outline: none;
+  box-shadow: none;
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+}
+#scrollDownBtn {
+  color: white;
+  background-color: #06a3da;
+  outline: none;
+  box-shadow: none;
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block coursecontent %}
+
+<div class="row mt-4">
+    <div class="col-md-3 col-sm-12 " id="content-topic">
+        <a href="/course/{{ subject.slug }}" style="font-size: 20px;font-weight: bold;">{{ subject.title|upper }}</a>
+        {% for chapter, topics in chapters_and_topics.items %}
+        <div class="card border-0">
+            <div class="card-header">
+                {{chapter.title}}
+            </div>
+            <ul class="list-group list-group-flush d-flex">
+                {% for topic in topics %}
+                <li class="list-group-item  flex-fill p-0 m-1 "><a href="/content/{{topic.slug}}/">{{topic.title|title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-8 col-sm-12" id="course-content">
+        {{subject.description | safe}}
+        <div class="row">
+            <div class="col controller m-4">
+                {% if prev %}<a href="/content/{{prev}}" class="btn float-start"><i
+                        class="fa-sharp fa-solid fa-backward"></i> PREV</a>{% endif %}
+                {% if next %}<a href="/content/{{next}}" class="btn float-end"><i class="fa-sharp fa-solid fa-forward"></i>
+                    NEXT</a>{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-12"></div>
+
+</div>
+
+
+{% endblock %}

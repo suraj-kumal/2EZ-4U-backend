@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block pagehead %}
+<div class="hero-wrap" style="height: 100px;background-color:blueviolet;">
+<!-- <div class="overlay"></div> -->
+</div>
+{% endblock %}
+{% block blog_content %}
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 ftco-animate py-md-5 mt-md-5">
+        <h2 class="mb-3" style="text-align: justify;">{{blog.title|safe}}</h2>
+        <p style="color: black;"><small>{{blog.published_at}}</small></p>
+        <img src="/media/{{blog.featured_image}}" alt="{{blog.title|safe}}" class="img-fluid">
+        <p style="text-align: justify;">{{blog.content | safe}}</p>
+        <div class="tag-widget post-tag-container mb-5 mt-5">
+          <div class="tagcloud">
+            {% for tag in tags %}
+            <a href="#" class="tag-cloud-link">{{tag.name}}</a>
+            {% endfor %}
+          </div>
+        </div>
+        
+
+      </div> <!-- .col-md-8 -->
+
+    </div>
+  </div>
+</section>
+{% endblock %}

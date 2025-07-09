@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block coursecontent %}
+<div class="row mt-4">
+    <div class="col-md-3 col-sm-12 " id="content-topic">
+        {% for category in categories %}
+        <div class="card border-0">
+            <ul class="list-group list-group-flush d-flex">
+                <li class="list-group-item  flex-fill p-0 m-1 "><a href="/engineering/project/{{category.slug}}/">{{category.title}}</a></li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-8 col-sm-12" id="course-content">
+        {% if projects %}
+        <h2 class="lead ">{{projects.0.title | safe}}</h2>
+        {{projects.0.abstract | safe}}
+        {% else %}
+        <p>not found </p>
+        {% endif %}
+
+    </div>
+    <div class="col-md-2 col-sm-12"></div>
+
+</div>
+{% endblock %}

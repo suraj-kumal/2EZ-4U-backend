@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block subjectlist %}
+<section class="ftco-section bg-light">
+   <div class="container">
+      <div class="row justify-content-center pb-4">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<!-- <span class="subheading">Start Learning Today</span> -->
+            <h2 class="mb-4">Our Courses</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for subject in subjects %}
+       <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+             <a href="/course/{{ subject.slug }}" class="img" style="background-image: url('{{ subject.logo.url }}');">
+                <!-- <span class="price">Software</span> -->
+            </a>
+            <div class="text p-4">
+                <h3 style="background-color:#6610f2;"><a style="color: white;" href="/course/{{ subject.slug }}">{{ subject.title|upper }}</a></h3>
+                <!-- <p class="advisor">Advisor <span>Tony Garret</span></p>
+                <ul class="d-flex justify-content-between">
+                   <li><span class="flaticon-shower"></span>2300</li>
+                   <li class="price">$199</li>
+               </ul> -->
+           </div>
+       </div>
+    </div>
+   {% endfor %}
+</div>
+</div>
+</section>
+{% endblock %}
+
+{% block recent_blog %}
+<section class="ftco-section bg-light">
+  <div class="container">
+     <div class="row justify-content-center pb-4">
+      <div class="col-md-12 heading-section text-center ftco-animate">
+         <span class="subheading">Our Blog</span>
+         <h2 class="mb-4">Recent Post</h2>
+     </div>
+ </div>
+ <div class="row d-flex">
+      {% for blog in blogs %}
+        <div class="col-lg-4 ftco-animate mb-4">
+          <div class="card">
+            <a href="/blog/{{blog.slug}}/">
+              <img src="/media/{{blog.featured_image}}" class="card-img-top" alt="{{blog.title}}">
+            </a>
+            <div class="card-body d-flex flex-column">
+              <div class="meta">
+                <p>
+                  <a href="#"><span class="fa fa-calendar mr-2"></span>{{blog.published_at}}</a>
+                </p>
+              </div>
+              <h3 class="card-title" style="text-align: justify;"><a href="/blog/{{blog.slug}}">{{blog.title}}</a></h3>
+              <p class="card-text">{{blog.content|truncatewords:10|safe}}</p>
+              <p class="mt-auto"><a href="/blog/{{blog.slug}}/" class="btn btn-secondary py-2 px-3">continue</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+</div>
+</div>
+</section>
+{% endblock %}
+

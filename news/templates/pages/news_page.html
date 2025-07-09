@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block pagehead %}
+
+<div class="hero-wrap" style="height: 100px;background-color:blueviolet;">
+<!-- <div class="overlay"></div> -->
+</div>
+{% endblock %}
+
+{% block newscontent %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 col-sm-12" style="color: black;">
+            <h2 class="card-title  "><a href="{{article.link}}" target="_blank">{{article.title}}</a></h2>
+            <p><small><a href="{{article.link}}" target="_blank">{{article.news_site.name}} &nbsp;</a> | {{article.publication_date}}</small></p>
+            {% if article.media_url == 'na' %}
+            <img  src="https://yt3.googleusercontent.com/u-7NgX9EATY6VnW6w2Ux0bRlkeEi8-IdUZujnrOwRj6nGc6RRd3aK45mcDK958okYu5kTmnK7Q=s900-c-k-c0x00ffffff-no-rj" alt="Generic placeholder image" style="width: 50%;height:auto;">
+            {% else %}
+            <img  src="{{article.media_url}}" alt="Generic placeholder image" style="width: 50%;height:auto;">
+            {% endif %}
+            <p class="card-text" style="text-align: justify;">{{article.description| safe}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block pagehead %}
+<div class="hero-wrap" style="height: 100px;background-color:blueviolet;">
+<!-- <div class="overlay"></div> -->
+</div>
+{% endblock %}
+{% block notice_content %}
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container">
+    <div class="row">
+    {% for notice in notices %}
+      <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
+        <h2 class="mb-3" style="text-align: justify;">{{notice.title|safe}}</h2>
+        <p style="text-align: justify;">{{notice.content | safe}}</p>
+        {% if notice.pdf_file %}
+        <iframe src="/media/{{notice.pdf_file}}" style="width:600px; height:500px;" frameborder="0"></iframe>
+        {% endif %}
+    {% endfor %}
+        
+
+      </div> <!-- .col-md-8 -->
+
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block subjectlist %}
+<div class="container-fluid course-list ">
+  <div class="row">
+    <div class="col-md-12 align-self-center text-center">
+      <h2>Our Courses</h2>
+    </div>
+    <hr>
+  </div>
+  <div class="row course-list shadow-lg">
+    {% for subject in subjects %}
+    <div class="col-md-4 col-sm-12 align-self-center ">
+      <div class="card mb-3 border-0 " style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <a href="/datascience/{{ subject.slug }}"><img src="{{subject.logo.url}}" class="img-fluid rounded-start"
+                alt="{{subject.title}}"></a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body align-self-center">
+              <h5 class="card-title"><a href="/datascience/{{ subject.slug }}">{{subject.title}}</a></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-8 col-sm-12">
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

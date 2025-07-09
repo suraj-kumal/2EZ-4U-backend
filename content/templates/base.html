@@ -1,0 +1,437 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% if seo %}{{seo.title}} | {% if topic %}{{topic.title}}{% else %}{% endif %} {% else %} Easy Explanation online web tutorials {% endif %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% if seo %}
+    <meta name="description"
+        content="{{seo.meta_description}}">
+    <meta name="keywords"
+        content="{{seo.keywords}}">
+    {% else %}
+    <meta name="description"
+        content="Explore comprehensive computer science tutorials and programming resources on our platform. Learn programming languages such as Python, Java, and JavaScript. Master data structures, algorithms, and web development. Enhance your coding skills with hands-on examples, practical projects, and expert guidance. Whether you're a beginner or an experienced developer, discover valuable insights to excel in the world of computer science. Start your coding journey with our engaging and educational tutorials today.">
+    <meta name="keywords"
+        content="computer science tutorials, programming languages, coding tutorials, Python tutorials, Java programming, JavaScript learning, data structures, algorithms, web development, coding projects, programming for beginners, software development, coding skills, programming education, learn coding online, computer science resources, coding practice, programming exercises, coding projects for students, programming community, tech tutorials">
+    {% endif %}
+
+    <meta name="author" content="InfographyTechnologies">
+    <link rel="icon"
+        href="https://yt3.googleusercontent.com/u-7NgX9EATY6VnW6w2Ux0bRlkeEi8-IdUZujnrOwRj6nGc6RRd3aK45mcDK958okYu5kTmnK7Q=s900-c-k-c0x00ffffff-no-rj"
+        type="image/x-icon">
+
+    <!-- preview  -->
+    {% if seo %}
+    <meta property="og:url" content="{{topic.slug}}" />
+    <meta property="og:title" content="{{seo.title}}" />
+    <meta property="og:description"
+        content="{{seo.meta_description}}" />
+    <meta property="og:image"
+        content="/media/{{subject.logo}}" />
+    {% else %}
+    <meta property="og:url" content="https://ezexplanation.com" />
+    <meta property="og:title" content="EzExplanation Computer engineering web Tutorial" />
+    <meta property="og:description"
+        content="Explore comprehensive computer science tutorials and programming resources on our platform. Learn programming languages such as Python, Java, and JavaScript. Master data structures, algorithms, and web development. Enhance your coding skills with hands-on examples, practical projects, and expert guidance. Whether you're a beginner or an experienced developer, discover valuable insights to excel in the world of computer science. Start your coding journey with our engaging and educational tutorials today." />
+    <meta property="og:image"
+        content="https://yt3.googleusercontent.com/u-7NgX9EATY6VnW6w2Ux0bRlkeEi8-IdUZujnrOwRj6nGc6RRd3aK45mcDK958okYu5kTmnK7Q=s900-c-k-c0x00ffffff-no-rj" />
+    {% endif %}
+    <!-- bootstrap and poppins  -->
+    <!-- Poppins font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- custom css  -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script type="text/javascript" src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <!-- bootstrap import  -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
+
+    <!-- highlight  -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+        integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css"
+        integrity="sha512-kihsljiamrbQ3b3s3TXoAWNSbzbp+gYIeeva81nQwCj/zICdiT/QnKbWTV7DElmAm3mc4vuTR3fo0ToTe2cpNw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    
+    <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/github.css' %}" />
+    <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- font awesome  -->
+    <link href="{% static 'fontawesome/css/fontawesome.css' %}" rel="stylesheet">
+    <link href="{% static 'fontawesome/css/brands.css' %}" rel="stylesheet">
+    <link href="{% static 'fontawesome/css/solid.css' %}" rel="stylesheet">
+
+    <!-- sidebar -->
+    <!-- <link href="{% static 'sidebar/css/styles.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'sidebar/js/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sidebar/js/main.js' %}"></script> -->
+    <!-- google AdSense  -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2413501485945953"
+        crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-2413501485945953">
+
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9SCNJQ255"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y9SCNJQ255');
+</script>
+
+<body>
+    {% block navigation %}
+    <div class="container-fluid my-5">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white  ps-4">
+            <a class="navbar-brand" href="/"><img
+                    src="https://yt3.googleusercontent.com/u-7NgX9EATY6VnW6w2Ux0bRlkeEi8-IdUZujnrOwRj6nGc6RRd3aK45mcDK958okYu5kTmnK7Q=s900-c-k-c0x00ffffff-no-rj"
+                    width="50" height="50" alt=""><span>Easy</span>Explanation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/about/us/" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/subject/list/" class="nav-link">Course</a></li>
+                    <li class="nav-item"><a href="https://www.youtube.com/@easyexplanation9220"
+                            class="nav-link">YouTube</a></li>
+                    <li class="nav-item"><a href="/notice/" class="nav-link">Notices</a></li>
+                    <li class="nav-item"><a href="/nec/exam/program/list/" class="nav-link">NEC License Exam</a></li>
+                    <li class="nav-item"><a href="/blog/list" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="/news/list" class="nav-link">News</a></li>
+                    <li class="nav-item"><a href="/engineering/project/" class="nav-link">Engineering Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% endblock %}
+
+    {% block breadcrumbs %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="navbar bg-white m-2 sticky-top bread" >
+    <ol class="breadcrumb" style="margin-top: 30px;background-color: #fff;">
+        <li class="breadcrumb-item {% if request.path == '/' %}active{% endif %}" {% if request.path == '/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/' %}
+                Home
+            {% else %}
+                <a href="/">Home</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/about/us/' %}active{% endif %}" {% if request.path == '/about/us/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/about/us/' %}
+                About
+            {% else %}
+                <a href="/about/us/">About</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/subject/list/' %}active{% endif %}" {% if request.path == '/subject/list/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/subject/list/' %}
+                Courses
+            {% else %}
+                <a href="/subject/list/">Courses</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/notice/' %}active{% endif %}" {% if request.path == '/notice/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/notice/' %}
+                Notice
+            {% else %}
+                <a href="/notice/">Notice</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/nec/exam/program/list/' %}active{% endif %}" {% if request.path == '/nec/exam/program/list/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/nec/exam/program/list/' %}
+                NEC License Exam
+            {% else %}
+                <a href="/nec/exam/program/list/">NEC License Exam</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/blog/list/' %}active{% endif %}" {% if request.path == '/blog/list/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/blog/list/' %}
+                Blog
+            {% else %}
+                <a href="/blog/list/">Blog</a>
+            {% endif %}
+        </li>
+        <li class="breadcrumb-item {% if request.path == '/news/list/' %}active{% endif %}" {% if request.path == '/news/list/' %}aria-current="page"{% endif %}>
+            {% if request.path == '/news/list/' %}
+                News
+            {% else %}
+                <a href="/news/list/">News</a>
+            {% endif %}
+        </li>
+    </ol>
+
+</nav>
+    {% endblock %}
+
+    <!-- {% block firstsection %}
+    <section id="section1" class="d-flex">
+        <div class="container align-self-center" id="hero">
+            <h1>Computer Engineering Tutorials</h1>
+            <h2>Welcome to <span>Easy Explanation</span></h2>
+        </div>
+    </section>
+    {% endblock %} -->
+
+    <div class="container-fluid main">
+        {% block body %}
+        {% block newslist %}
+        {% endblock %}
+
+        {% block subjectlist %}
+        {% endblock %}
+
+        {% block aboutus %}
+        {% endblock %}
+
+        {% block coursecontent %}
+        {% endblock %}
+
+        {% block bloglist %}
+        {% endblock %}
+
+        {% block youtube %}
+        {% endblock %}
+
+        {% block recent_blog %}
+        {% endblock %}
+
+        {% block blog_content %}
+        {% endblock %}
+
+        {% block notice_content %}
+        {% endblock %}
+
+
+
+        {% block newscontent %}
+        {% endblock %}
+
+        {% block 404 %}
+        {% endblock %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <!-- <div class="container "> -->
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Easy Explanation Ez</h5>
+
+                        <p style="text-align: justify;">
+                            Explore the vast world of computer science with our comprehensive tutorials and
+                            resources. Whether you're a beginner taking your first steps into coding or an
+                            experienced programmer seeking advanced knowledge, our curated content covers a wide
+                            range of computer science-related subjects. Dive into programming languages, algorithms,
+                            data structures, artificial intelligence, machine learning, web development, and more.
+                            Stay curious, keep coding, and empower yourself with the skills to thrive in the dynamic
+                            field of computer science. Happy learning!.
+                        </p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Courses</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            {% for subject in subjects %}
+                            <li><a href="/course/{{ subject.slug }}" class="py-2 d-block">{{subject.title | title}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <!-- <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <!-- <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <!-- <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+
+            <hr class="mb-4" />
+
+            <!-- Section: CTA -->
+            <section class="">
+                <p class="d-flex justify-content-center align-items-center">
+                    <span class="me-3">ezexplanation: infography technologies.com</span>
+                    <!-- <button type="button" class="btn btn-outline-light btn-rounded">
+                            Sign up!
+                        </button> -->
+                </p>
+            </section>
+            <!-- Section: CTA -->
+
+            <hr class="mb-4" />
+
+            <!-- Section: Social media -->
+            <section class="mb-4 text-center">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/InfographyTechnologies"
+                    role="button"><i class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/@easyexplanation9220"
+                    role="button"><i class="fa-brands fa-youtube"></i>
+
+                    <!-- Google -->
+                    <!-- <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-google"></i></a> -->
+
+                    <!-- Instagram -->
+                    <!-- <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-instagram"></i></a> -->
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/company/13433552"
+                        role="button"><i class="fab fa-linkedin-in"></i></a>
+
+                    <!-- Github -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/infyprakash"
+                        role="button"><i class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: #000">
+            © 2024 Copyright:
+            <a class="text-white" href="https://infographytech.com/"
+                style="text-decoration: none;">infographytech.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!-- </div> -->
+    <!-- End of .container -->
+    {% endblock %}
+    
+    <button id="scrollUpBtn" class="btn btn-primary round-btn" style="position: fixed; bottom: 20px; right: 20px;"><i class="fa-solid fa-angles-up"></i></button><br>
+    <button id="scrollDownBtn" class="btn btn-primary round-btn" style="position: fixed; bottom: 60px; right: 20px;"><i class="fa-solid fa-angles-down"></i></button>
+
+<script>
+$(document).ready(function(){
+    // Scroll Up Button
+    $("#scrollUpBtn").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, 500); // Adjust speed here (500 milliseconds)
+        return false;
+    });
+
+    // Scroll Down Button
+    $("#scrollDownBtn").click(function() {
+        $("html, body").animate({ scrollTop: $(document).height() }, 500); // Adjust speed here (500 milliseconds)
+        return false;
+    });
+
+
+});
+
+
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6622487ba0c6737bd12e1075/1hrqum9i2';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block coursecontent %}
+
+<div class="row mt-4">
+    <div class="col-md-3 col-sm-12 " id="content-topic">
+        <a href="/datascience/{{ subject.slug }}" style="font-size: 20px;font-weight: bold;">{{ subject.title|upper }}</a><hr>
+        {% for chapter, topics in chapters_and_topics.items %}
+        <div class="card border-0">
+            <p class="h6">{{chapter.title}}</p>
+            <ul class="list-group list-group-flush d-flex">
+                {% for topic in topics %}
+                <li class="list-group-item  flex-fill p-0 m-1 "><a href="/datascience/content/{{topic.slug}}/">{{topic.title|title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-8 col-sm-12" id="course-content">
+        {{content | safe}}
+    </div>
+    <div class="col-md-2 col-sm-12"></div>
+
+</div>
+
+
+{% endblock %}

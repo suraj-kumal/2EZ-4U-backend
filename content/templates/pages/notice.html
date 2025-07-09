@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block notice_content %}
+<div class="container">
+  {% for notice in notices %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h2 class="mb-3" style="text-align: justify;">{{notice.title|safe}}</h2>
+      <p style="text-align: justify;">{{notice.content | safe}}</p>
+      {% if notice.pdf_file %}
+      <iframe src="/media/{{notice.pdf_file}}" style="width:800px; height:800px;" frameborder="0"></iframe>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
