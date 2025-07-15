@@ -240,7 +240,6 @@ def add_chapter(request):
             chapter = Chapter.objects.create(
                 uid=str(uuid.uuid4()).replace("-", ""),
                 title=title,
-                slug=slugify(title),
                 is_active=True,
                 order_priority=new_priority,
                 subject_id=subject.uid,
@@ -281,7 +280,6 @@ def add_topic(request):
             topic = Topic.objects.create(
                 uid=topic_uid,
                 title=title,
-                slug=slugify(title),
                 is_active=True,
                 chapter_id=chapter.uid,
             )
@@ -338,7 +336,6 @@ def add_course(request):
                 course_type_id="3079d562ecb24edabae5a6ac8c13b307",
                 description=description,
                 logo=logo,
-                slug=slugify(name),
                 is_active=True,
             )
 

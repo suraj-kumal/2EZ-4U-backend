@@ -8,7 +8,7 @@
 
 {% block content %}
 <style>
-/* ALERTS */
+
     .alert {
         padding: 15px;
         margin: 15px 0;
@@ -48,7 +48,6 @@
         to { -webkit-transform: translateY(0); opacity: 1; }
     }
 
-    /* BUTTON */
     .button {
         display: -webkit-inline-box;
         display: -ms-inline-flexbox;
@@ -75,7 +74,6 @@
         background-color: #f0f0f0;
     }
 
-    /* FORM */
     form {
         background-color: #111;
         border: 1px solid #333;
@@ -116,7 +114,6 @@
         resize: vertical;
     }
 
-    /* SUBJECT IMAGE */
     .subject-logo {
         height: 10rem;
         border: 1px solid #555;
@@ -126,7 +123,7 @@
         max-width: 100%;
     }
 
-    /* CHAPTERS LIST */
+
     .chapters-list {
         background: #1a1a1a;
         padding: 1.5rem;
@@ -150,7 +147,7 @@
         text-decoration: underline;
     }
 
-    /* SELECT */
+
     select {
         padding: 0.5rem;
         background-color: #111;
@@ -165,7 +162,7 @@
                 appearance: none;
     }
 
-    /* DELETE FORM */
+
     .delete-form {
         border: 2px solid red;
         padding: 2rem;
@@ -173,7 +170,7 @@
         border-radius: 10px;
     }
 
-    /* SEO */
+
     .seo-section {
         border: 1px solid grey;
         padding: 1rem;
@@ -181,7 +178,6 @@
         border-radius: 10px;
     }
 
-    /* UPLOAD FORM */
     .upload-form {
         background-color: #111;
         padding: 2rem;
@@ -191,7 +187,7 @@
         color: white;
     }
 
-    /* FILE INPUT */
+
     .file-input {
         display: none;
     }
@@ -216,7 +212,6 @@
         background-color: #f0f0f0;
     }
 
-    /* MEDIA QUERY */
     @media (max-width: 600px) {
         select {
             max-width: 55vw;
@@ -249,7 +244,7 @@
         {% endif %}
     </div>
 
-    <!-- Update Title -->
+
     <form action="{% url 'subject' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="uid" value="{{ subject.uid }}">
@@ -260,19 +255,19 @@
         <input type="submit" value="Update Title" class="button">
     </form>
 
-    <!-- Change Logo -->
+
     <form action="{% url 'update_logo' %}" method="POST" enctype="multipart/form-data" class="upload-form">
         {% csrf_token %}
         <input type="hidden" name="uid" value="{{ subject.uid }}">
 
-        <!-- Custom File Upload Button -->
+   
         <label for="logo-upload" class="file-label">Choose Image</label>
         <input type="file" id="logo-upload" name="logo" accept="image/*" class="file-input" required>
 
-        <!-- Display Selected File Name -->
+     
         <p id="file-name" style="margin-top: 0.5rem; font-size: 0.875rem; color: #aaa;"></p>
 
-        <!-- Submit Button -->
+       
         <input type="submit" value="Update Logo" class="button" style="margin-top: 1rem;">
     </form>
 
@@ -289,11 +284,11 @@
             }
         });
     </script>
-    <!-- SEO Section -->
+
     <div class="seo-section">
             <h2 style="text-align: center;">SEO</h2>
 
-            <!-- SEO Title -->
+       
             <form action="{% url 'update_seo' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ seo.id }}">
@@ -303,7 +298,6 @@
                 <input type="submit" value="Update Title" class="button">
             </form>
 
-            <!-- SEO Meta Description -->
             <form action="{% url 'update_seo' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ seo.id }}">
@@ -313,7 +307,7 @@
                 <input type="submit" value="Update Meta Description" class="button">
             </form>
 
-            <!-- SEO Keywords -->
+
             <form action="{% url 'update_seo' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ seo.id }}">
@@ -324,22 +318,146 @@
             </form>
         </div>
 
-    <!-- Description -->
+
     <div>
         <h3>Description</h3>
         <div>{{ cleaned_description|safe }}</div>
     </div>
 
-    <!-- Update Description -->
-    <form action="{% url 'subject' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="uid" value="{{ subject.uid }}">
-        <label>Update Description</label>
-        <textarea name="description" class="input" required>{{ subject.description }}</textarea>
-        <input type="submit" value="Update Description" class="button">
-    </form>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
 
-    <!-- Chapters -->
+<form action="{% url 'subject' %}" method="POST" style="color: #000000;">
+    {% csrf_token %}
+    <input type="hidden" name="uid" value="{{ subject.uid }}">
+    <label style="color: #fff;">Update Description</label>
+    
+    <textarea name="description" id="description" class="input" required style="display: none;">{{ subject.description }}</textarea>
+    
+
+    <div id="quill-description-editor" class="input" style="min-height: 200px; margin-bottom: 1rem;"></div>
+    
+    <input type="submit" value="Update Description" class="button">
+</form>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+
+    <script>
+
+        const descriptionQuill = new Quill('#quill-description-editor', {
+            theme: 'snow',
+            placeholder: 'Enter subject description...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic'],
+                    ['link', 'bulletedList', 'numberedList'],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        descriptionQuill.keyboard.addBinding({
+            key: 'Enter',
+            shiftKey: true
+        }, function(range, context) {
+            descriptionQuill.insertText(range.index, '\n');
+            descriptionQuill.setSelection(range.index + 1);
+        });
+
+
+        const descriptionTextarea = document.getElementById('description');
+        
+ 
+        if (descriptionTextarea.value.trim()) {
+            descriptionQuill.root.innerHTML = descriptionTextarea.value;
+        }
+
+
+        descriptionQuill.on('text-change', function() {
+            descriptionTextarea.value = descriptionQuill.root.innerHTML;
+        });
+
+
+        const descriptionForm = descriptionTextarea.closest('form');
+        if (descriptionForm) {
+            descriptionForm.addEventListener('submit', function(e) {
+
+                descriptionTextarea.value = descriptionQuill.root.innerHTML;
+                
+
+                if (descriptionQuill.getText().trim().length === 0) {
+                    e.preventDefault();
+                    alert('Description is required. Please enter a description.');
+                    return false;
+                }
+            });
+        }
+
+
+        descriptionQuill.on('selection-change', function(range, oldRange, source) {
+            if (range) {
+
+                document.getElementById('quill-description-editor').classList.add('focused');
+            } else {
+
+                document.getElementById('quill-description-editor').classList.remove('focused');
+            }
+        });
+    </script>
+
+
+    <style>
+
+        #quill-description-editor .ql-toolbar {
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            background: #f9f9f9;
+        }
+        
+        #quill-description-editor .ql-container {
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            background: white;
+        }
+        
+        #quill-description-editor .ql-editor {
+            min-height: 150px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+
+        #quill-description-editor {
+
+            width: 100%;
+            display: block;
+        }
+        
+        #quill-description-editor.focused .ql-container {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+
+        #quill-description-editor {
+            margin-bottom: 1rem;
+        }
+        
+
+        #quill-description-editor .ql-editor.ql-blank::before {
+            font-style: italic;
+            color: #999;
+        }
+    </style>
+
+
     <div class="chapters-list">
         <h2>Chapters</h2>
         {% if chapters %}
@@ -361,7 +479,7 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
-                    <!-- Add Topic -->
+
                     <form action="{% url 'add_topic' %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="uid" value="{{ chapter.uid }}">
@@ -377,7 +495,6 @@
         {% endif %}
     </div>
 
-    <!-- Add Chapter -->
     <form action="{% url 'add_chapter' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="uid" value="{{ subject.uid }}">
@@ -386,13 +503,11 @@
         <input type="submit" value="Add Chapter" class="button">
     </form>
 
-    <!-- Delete Section -->
     <div class="delete-form">
         <h2 style="text-align: center;">Delete Options</h2>
 
         <p style="color:red;text-align: center;">Warning ! deleted content cannot be recovered</p>
 
-        <!-- Delete Topic -->
         <form action="{% url 'delete' %}" method="POST" onsubmit="return confirmDel()">
             {% csrf_token %}
             <input type="hidden" name="slug" value="{{ subject.slug }}">
@@ -409,7 +524,7 @@
             <input type="submit" value="Delete Topic" class="button">
         </form>
 
-        <!-- Delete Chapter -->
+
         <form action="{% url 'delete' %}" method="POST" onsubmit="return confirmDelete()">
             {% csrf_token %}
             <input type="hidden" name="slug" value="{{ subject.slug }}">
@@ -422,7 +537,7 @@
             <input type="submit" value="Delete Chapter" class="button">
         </form>
 
-        <!-- Delete Course -->
+
         <form action="{% url 'delete' %}" method="POST" onsubmit="return confirm('Are you sure you want to delete {{ subject.title }} course?')">
             {% csrf_token %}
             <input type="hidden" name="slug" value="{{ subject.slug }}">

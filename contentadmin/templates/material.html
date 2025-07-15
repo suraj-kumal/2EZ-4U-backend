@@ -54,7 +54,6 @@
         opacity: 0.75;
     }
 
-    /* Slide-in animation for alerts */
     @keyframes slideIn {
         from {
             transform: translateY(-10px);
@@ -85,7 +84,6 @@
         margin: 2rem auto;
     }
 
-    /* Inputs & Textareas */
     .form-wrapper input[type="text"],
     .form-wrapper textarea {
         width: 100%;
@@ -113,7 +111,6 @@
         font-family: monospace;
     }
 
-    /* Buttons */
     .button {
         display: inline-block;
         background-color: white;
@@ -133,7 +130,6 @@
         background-color: #f0f0f0;
     }
 
-    /* Navigation Link Button */
     .nav-link {
         display: -webkit-inline-box;
         display: -ms-inline-flexbox;
@@ -173,7 +169,6 @@
         font-size: 1.75rem;
     }
 
-    /* Content Display */
     .content-display {
         background-color: #1c1c1f;
         border: 1px solid #2e2e30;
@@ -186,15 +181,14 @@
         line-height: 1.6;
     }
 
-    /* Code Blocks */
     pre {
         overflow-y: scroll;
-        -ms-overflow-style: none;     /* IE 10+ */
-        scrollbar-width: none;        /* Firefox */
+        -ms-overflow-style: none;  
+        scrollbar-width: none;   
     }
 
     pre::-webkit-scrollbar {
-        display: none;                /* Chrome, Safari, Edge */
+        display: none;     
     }
 
 </style>
@@ -225,12 +219,11 @@
 
 <h2>{{ topic.title }}</h2>
 
-<!-- Displayed Material -->
+
 <div class="content-display">
     {{ cleaned_material|safe }}
 </div>
 
-<!-- Update Topic Title -->
 <div class="form-wrapper">
     <form action="{% url 'update_topic_title' %}" method="post">
         {% csrf_token %}
@@ -242,19 +235,116 @@
     </form>
 </div>
 
-<!-- Update Content -->
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+
 <div class="form-wrapper">
-    <form action="{% url 'update_content' %}" method="post">
+    <form action="{% url 'update_content' %}" method="post" style="color:#000000">
         {% csrf_token %}
         <input type="hidden" name="uid" value="{{ material.uid }}">
         <input type="hidden" name="subject" value="{{ subjectslug }}">
         <input type="hidden" name="chapter" value="{{ chapter.slug }}">
         <input type="hidden" name="topic" value="{{ topic.slug }}">
-        <textarea name="content" placeholder="Enter new topic content...">{{ material.content }}</textarea>
-        <input type="submit" value="Update Content" class="button">
+        
+       
+        <textarea name="content" id="content" placeholder="Enter new material" style="display: none;">{{ material.content }}</textarea>
+        
+        
+        <div id="quill-content-editor" style="min-height: 300px; margin-bottom: 1rem;"></div>
+        
+        <input type="submit" value="Update Content" class="button" style="margin-top: 1rem;">
     </form>
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+
+<script>
+    
+    const contentQuill = new Quill('#quill-content-editor', {
+        theme: 'snow',
+        placeholder: 'Enter new topic content...',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic'],
+                ['link', 'bulletedList', 'numberedList'],
+                [{ 'indent': '-1'}, { 'indent': '+1' }],
+                ['blockquote'],
+                ['clean']
+            ]
+        }
+    });
+
+    
+    contentQuill.keyboard.addBinding({
+        key: 'Enter',
+        shiftKey: true
+    }, function(range, context) {
+        contentQuill.insertText(range.index, '\n');
+        contentQuill.setSelection(range.index + 1);
+    });
+
+    const contentTextarea = document.getElementById('content');
+    
+
+    if (contentTextarea.value.trim()) {
+        contentQuill.root.innerHTML = contentTextarea.value;
+    }
+
+
+    contentQuill.on('text-change', function() {
+        contentTextarea.value = contentQuill.root.innerHTML;
+    });
+
+    const contentForm = contentTextarea.closest('form');
+    if (contentForm) {
+        contentForm.addEventListener('submit', function(e) {
+           
+            contentTextarea.value = contentQuill.root.innerHTML;
+       
+            if (contentQuill.getText().trim().length === 0) {
+                e.preventDefault();
+                alert('Please enter some content before submitting.');
+                return false;
+            }
+        });
+    }
+</script>
+
+<style>
+
+    #quill-content-editor .ql-toolbar {
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    #quill-content-editor .ql-container {
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+    }
+    
+    #quill-content-editor .ql-editor {
+        min-height: 250px;
+        padding: 12px;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    #quill-content-editor {
+        margin-bottom: 1rem;
+        color: #ffffff;
+    }
+
+    #quill-content-editor .ql-editor::before {
+        font-style: italic;
+        color: #999;
+    }
+</style>
 <script>
     setTimeout(() => {
         document.querySelectorAll('.alert').forEach(alert => {

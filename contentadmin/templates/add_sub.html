@@ -20,10 +20,114 @@
             <input type="file" name="logo" accept="image/*" id="logo" class="input-file" required>
             <span id="file-name" class="file-name-display">No file chosen</span>
         </div>
+            <!-- Include Quill CSS in your template head -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
 
-        <label for="description">Description</label>
-        <textarea name="description" placeholder="Enter course description" class="input-textarea"></textarea>
+<!-- Your existing Django form structure -->
+            <div style="color: black;">
+                <label for="description">Description</label>
+                
+                <!-- Hidden textarea to maintain Django form compatibility -->
+                <textarea name="description" id="description" placeholder="Enter course description" class="input-textarea" style="display: none;"></textarea>
+                
+                <!-- Quill editor container -->
+                <div id="quill-editor" class="input-textarea" style="min-height: 200px;"></div>
+                
+                <!-- Include Quill JS -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+                
+                <script>
+                    // Initialize Quill editor
+                    const quill = new Quill('#quill-editor', {
+                        theme: 'snow',
+                        placeholder: 'Enter course description...',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic'],
+                                ['link', 'blockquote'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                [{ 'indent': '-1'}, { 'indent': '+1' }],
+                                ['clean']
+                            ]
+                        }
+                    });
 
+                    // Handle Shift+Enter for line breaks
+                    quill.keyboard.addBinding({
+                        key: 'Enter',
+                        shiftKey: true
+                    }, function(range, context) {
+                        quill.insertText(range.index, '\n');
+                        quill.setSelection(range.index + 1);
+                    });
+
+                    // Sync Quill content with hidden textarea for Django form submission
+                    const textarea = document.getElementById('description');
+                    
+                    // Update textarea when Quill content changes
+                    quill.on('text-change', function() {
+                        textarea.value = quill.root.innerHTML;
+                    });
+
+                    // Set initial content from textarea (for edit forms)
+                    if (textarea.value) {
+                        quill.root.innerHTML = textarea.value;
+                    }
+
+                    // Ensure content is synced before form submission
+                    const form = textarea.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', function() {
+                            textarea.value = quill.root.innerHTML;
+                        });
+                    }
+
+                    // Optional: Style the Quill editor to match your existing input styles
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const quillContainer = document.querySelector('#quill-editor .ql-container');
+                        const quillToolbar = document.querySelector('#quill-editor .ql-toolbar');
+                        
+                        // Apply your existing input-textarea styles to Quill
+                        if (quillContainer) {
+                            // Copy styles from your .input-textarea class
+                            // Adjust these to match your existing styles
+                            quillContainer.style.fontFamily = getComputedStyle(textarea).fontFamily;
+                            quillContainer.style.fontSize = getComputedStyle(textarea).fontSize;
+                        }
+                    });
+                </script>
+            </div>
+
+            <!-- Alternative: CSS-only styling approach -->
+            <style>
+                /* Style Quill to match your existing input styles */
+                #quill-editor .ql-container {
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+                
+                #quill-editor .ql-editor {
+                    min-height: 120px;
+                    padding: 12px;
+                }
+                
+                /* Hide Quill toolbar border if it conflicts with your styles */
+                #quill-editor .ql-toolbar {
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                    border-bottom: none;
+                }
+                
+                #quill-editor .ql-container {
+                    border-bottom: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                    border-top: none;
+                }
+                
+            </style>
         <input type="submit" value="Create Course" class="button" style="margin-top: 1rem;width: 100%;text-align: center;">
     </form>
 </div>

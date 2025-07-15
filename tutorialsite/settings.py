@@ -50,6 +50,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.ezexplanation.com",
     "http://www.test.ezexplanation.com",
     "https://www.test.ezexplanation.com",
+    "*"
 ]
 
 
@@ -91,7 +92,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "tutorialsite.urls"
 
-UNSPLASH_ACCESS_KEY = config("UNSPLASH_ACCESS_KEY")
 
 
 TEMPLATES = [
@@ -139,7 +139,12 @@ DATABASES = {
     }
 }
 
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
