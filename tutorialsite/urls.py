@@ -34,10 +34,10 @@ sitemaps = {
     "necmaterials": NecMaterialSitemap,
 }
 urlpatterns = [
-    # path(
-    #     "api/00ef4e8d411f0f320818f3857a7a19a97d4984b1e5d850b09edde428b5531a95/",
-    #     admin.site.urls,
-    # ),
+    path(
+        "api/00ef4e8d411f0f320818f3857a7a19a97d4984b1e5d850b09edde428b5531a95/",
+        admin.site.urls,
+    ),
     path("api/", include("content.urls")),
     path("news/", include("news.urls")),
     path("api/nec/exam/", include("neclicense.urls")),
@@ -49,7 +49,8 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-    path("contentadmin/", include("contentadmin.urls")),  # <-- Add this line
+    path("contentadmin/", include("contentadmin.urls")),
+    path("api/v1/ad", include("smartad.urls")),
 ]
 
 if settings.DEBUG:

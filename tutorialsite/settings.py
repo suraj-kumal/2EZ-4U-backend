@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     "news",
     "corsheaders",
     "contentadmin",
+    "smartad"
 ]
 SITE_ID = 1
 
