@@ -76,7 +76,8 @@ INSTALLED_APPS = [
     "news",
     "corsheaders",
     "contentadmin",
-    "smartad"
+    "smartad",
+    'taggit',
 ]
 SITE_ID = 1
 
@@ -137,6 +138,11 @@ DATABASES = {
         "PASSWORD": config("DB_PASSWORD"),
         "HOST": config("DB_HOSTNAME"),
         "PORT": config("DB_PORT", cast=int),
+        "OPTIONS": {
+            "sql_mode": "STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION",
+            "charset": "utf8mb4",
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'",
+        },
     }
 }
 
